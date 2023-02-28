@@ -7,10 +7,10 @@
 Dice::Dice()
 {
     srand(time(NULL));
-    roll_counter.resize(FACES);
+    m_roll_counter.resize(m_FACES);
 
-    for(int i=0; i<FACES; i++)
-      roll_counter[i] = 0;
+    for(int i=0; i<m_FACES; i++)
+      m_roll_counter[i] = 0;
 }
 
 //overloaded constructor
@@ -18,14 +18,14 @@ Dice::Dice(unsigned int num)
 {
     if( num == 0 )
     {
-        roll_counter.resize(FACES);
+        m_roll_counter.resize(m_FACES);
     }
     else{
-        roll_counter.resize(num);
+        m_roll_counter.resize(num);
     }
-    for(int i=0; i<FACES; i++)
+    for(int i=0; i<m_FACES; i++)
     {
-        roll_counter[i] = 0;
+        m_roll_counter[i] = 0;
     }
 
 }
@@ -34,8 +34,8 @@ Dice::Dice(unsigned int num)
 // (inclusive) and return it
 int Dice::roll()
 {
-    int roll = rand() % roll_counter.size();
-    roll_counter[roll]++;
+    int roll = rand() % m_roll_counter.size();
+    m_roll_counter[roll]++;
     return roll + 1;
 }
 
@@ -44,11 +44,11 @@ int Dice::roll()
 vector <double> Dice::get_distribution(){
     vector<double> dist;
     double total_rolls = 0;
-    for(vector<int>::iterator itr = roll_counter.begin(); itr != roll_counter.end(); itr++){
+    for(vector<int>::iterator itr = m_roll_counter.begin(); itr != m_roll_counter.end(); itr++){
         total_rolls += *itr;
     }
-    for(int i = 0; i < roll_counter.size(); i++) {
-        dist.push_back(roll_counter[i] / total_rolls);
+    for(int i = 0; i < m_roll_counter.size(); i++) {
+        dist.push_back(m_roll_counter[i] / total_rolls);
     }
     return dist;
 }
