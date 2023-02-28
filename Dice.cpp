@@ -41,6 +41,14 @@ int Dice::roll()
 
 // return the count of how many times each face has been rolled, as a vector
 // where each face's count is at index face-1 (i.e. Face 1 is at index 0)
-vector <int> Dice::get_distribution(){
-    return roll_counter;
+vector <double> Dice::get_distribution(){
+    vector<double> dist;
+    double total_rolls = 0;
+    for(vector<int>::iterator itr = roll_counter.begin(); itr != roll_counter.end(); itr++){
+        total_rolls += *itr;
+    }
+    for(int i = 0; i < roll_counter.size(); i++) {
+        dist.push_back(roll_counter[i] / total_rolls);
+    }
+    return dist;
 }
